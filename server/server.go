@@ -31,6 +31,7 @@ func server() {
 		}
 		go listenMessages(c)
 		clients = append(clients, clientList.Client{Client: c, Nickname: string(b[:bs])})
+		fmt.Println("New client conected: ", string(b[:bs]))
 	}
 }
 func sendMessages(message *message.Message) {
@@ -65,6 +66,7 @@ func listenMessages(client net.Conn) {
 func deleteClient(nickname string) {
 	for index, c := range clients {
 		if nickname == c.Nickname {
+			fmt.Println("Removing client: ", nickname)
 			clients = RemoveIndex(clients, index)
 		}
 	}

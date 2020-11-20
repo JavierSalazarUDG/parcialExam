@@ -34,13 +34,6 @@ func listenMessages() {
 	for {
 		var message *message.Message
 		err := gob.NewDecoder(c).Decode(&message)
-		if show == true {
-			if message.Type == 3 {
-				fmt.Println(message.User, ":", message.Message)
-			} else {
-				fmt.Println(message.User, ":", message.FileName)
-			}
-		}
 		if message.Type > 2 {
 			messages = append(messages, message)
 			// fmt.Println(messages)
@@ -48,6 +41,13 @@ func listenMessages() {
 		if err != nil {
 			fmt.Println(err)
 			return
+		}
+		if show == true {
+			if message.Type == 3 {
+				fmt.Println(message.User, ":", message.Message)
+			} else {
+				fmt.Println(message.User, ":", message.FileName)
+			}
 		}
 	}
 }
@@ -96,12 +96,10 @@ func readInpunt() string {
 }
 func leave() {
 	message := &message.Message{User: nickname, Message: "", Type: 0}
-	fmt.Println(message)
 	err := gob.NewEncoder(client).Encode(message)
 	if err != nil {
 		fmt.Println(err)
 	}
-
 }
 
 func main() {
@@ -114,12 +112,13 @@ func main() {
 	fmt.Println("conectado al servidor")
 	go listenMessages()
 	defer leave()
+	fmt.Println("Escriba la opcion deseada")
+	fmt.Println("1.-Enviar mensaje")
+	fmt.Println("2.-Enviar un archivo")
+	fmt.Println("3.- Mostrar mensajes")
+	fmt.Println("4.- Salir")
 	for loop == true {
 		var opc int
-		fmt.Println("Escriba la opcion deseada")
-		fmt.Println("1.-Enviar mensaje")
-		fmt.Println("2.-Enviar un archivo")
-		fmt.Println("3.- Mostrar mensajes")
 		fmt.Scanln(&opc)
 		switch opc {
 		case 1:
@@ -129,10 +128,14 @@ func main() {
 			readFile()
 			break
 		case 3:
-			showMessages()
+			if show == false {
+				showMessages()
+			}
+			show = !show
 			break
-		default:
-			//loop = false
+		case 4:
+			loop = false
+			break
 		}
 	}
 

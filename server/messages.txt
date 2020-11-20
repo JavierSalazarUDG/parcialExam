@@ -1,0 +1,10 @@
+javier:Hola hay alguien conectado ?
+juan:hola javier estoy yo
+javier:aa hola juan me puedes enviar el trabajo ? 
+juan:claro javier
+juan:trabajo.txtjavier:muchas gracias juan
+javier:me tengo que desconectar, te queds esperando a ricardo ? 
+juan:si claro
+ricardo:Juan que bueno que estas conectado me pasas las pruebas ? 
+juan:claro ricardo
+juan:pruebas.txtricardo:gracias me voy tengo que hacer tarea 
